@@ -1,0 +1,14 @@
+body {
+  background-color: rgb(73, 83, 93);
+  color: white;
+}
+
+.error-modal {
+  background-color: salmon;
+  color: black;
+  border: 2px solid rgb(186, 0, 0);
+}
+
+.error-url {
+  color: rgb(93, 0, 0);
+}
