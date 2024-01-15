@@ -2,7 +2,11 @@ import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Navbar } from "react-bootstrap";
+
 import Nav from "react-bootstrap/Nav";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const email = <FontAwesomeIcon icon={faEnvelope} />;
 const linkedin = <FontAwesomeIcon icon={faLinkedin} />;
@@ -17,6 +21,7 @@ interface HeaderProps {
 }
 
 function Header(props: HeaderProps) {
+  const { isAuthenticated } = useAuth0();
   return (
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
@@ -34,6 +39,7 @@ function Header(props: HeaderProps) {
             <Nav.Link href={props.github} target="_blank">
               {github}
             </Nav.Link>
+            {isAuthenticated ? <LogoutButton /> : <LoginButton />}
           </Nav>
         </Navbar.Collapse>
       </Container>

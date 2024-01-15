@@ -1,4 +1,8 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import Card from "react-bootstrap/Card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { API_URL } from "../api";
 
 export interface ProjectProps {
   id: number;
@@ -7,9 +11,37 @@ export interface ProjectProps {
   source?: string;
   live?: string;
   is_self_hosted?: boolean;
+  onDelete: (id: number) => void;
 }
 
+const trash = <FontAwesomeIcon icon={faTrash} />;
+
 function ProjectCard(props: ProjectProps) {
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+
+  const handleDelete = async () => {
+    const accessToken = await getAccessTokenSilently({
+      authorizationParams: { audience: "https://api.lucasjensen.me/" },
+    });
+
+    fetch(`${API_URL}projects/${props.id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => {
+        if (response.status === 204) {
+          props.onDelete(props.id);
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   const projectDescription = props.description
     .split("\n")
     .map((line, index) => {
@@ -35,6 +67,13 @@ function ProjectCard(props: ProjectProps) {
           </Card.Link>
         )}
       </Card.Body>
+      {isAuthenticated && (
+        <Card.Footer>
+          <Card.Link onClick={handleDelete} className="delete-project">
+            {trash}
+          </Card.Link>
+        </Card.Footer>
+      )}
     </Card>
   );
 }

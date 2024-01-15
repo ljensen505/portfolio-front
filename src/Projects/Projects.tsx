@@ -16,6 +16,10 @@ function Projects() {
       });
   }, []);
 
+  const handleDeleteProject = (id: number) => {
+    setProjectsData(projectsData.filter((project) => project.id !== id));
+  };
+
   const projects = projectsData.map((project) => {
     return (
       <Row key={project.id} className=" mb-3">
@@ -27,6 +31,7 @@ function Projects() {
             source={project.source}
             live={project.live}
             is_self_hosted={project.is_self_hosted}
+            onDelete={handleDeleteProject}
           />
         </Col>
       </Row>
