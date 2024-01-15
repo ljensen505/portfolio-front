@@ -78,6 +78,12 @@ function App() {
       </Container>
       <footer className="text-center">
         <p>
+          App vesrion:{" "}
+          <a id="app-link" href="lucasjensen.me">
+            <code id="app-version">{import.meta.env.PACKAGE_VERSION}</code>
+          </a>
+        </p>
+        <p>
           API version:{" "}
           <a id="api-link" href={API_URL}>
             <code id="api-version">{apiVersion?.version || ""}</code>

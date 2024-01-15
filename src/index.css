@@ -23,8 +23,12 @@ body {
   text-justify: inter-word;
 }
 
+.delete-project {
+  color: rgb(217, 20, 20);
+}
+
 #api-version {
-  color: #18113d;
+  color: #1a009d;
 }
 
 #api-version:hover {
@@ -32,5 +36,17 @@ body {
 }
 
 #api-link {
+  text-decoration: none;
+}
+
+#app-version {
+  color: #1a009d;
+}
+
+#app-version:hover {
+  font-weight: bold;
+}
+
+#app-link {
   text-decoration: none;
 }
