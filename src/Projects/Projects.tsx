@@ -18,8 +18,8 @@ function Projects() {
 
   const projects = projectsData.map((project) => {
     return (
-      <Row key={project.id} className="justify-content-md-center mb-3">
-        <Col md={8} style={{ maxWidth: "36rem" }}>
+      <Row key={project.id} className=" mb-3">
+        <Col>
           <ProjectCard
             id={project.id}
             name={project.name}
@@ -38,8 +38,8 @@ function Projects() {
       <hr />
       <Row>
         <Col className="text-center">
-          <p className="h1">Projects</p>
-          <p>
+          <p className="h1 text-end mt-4">Projects</p>
+          <p className="project-description">
             'self hosted' indicates that a given project is hosted on a
             Raspberry Pi or with Linode. These projects are served with Nginx
             and managed with a combination of GitHub Actions/Webhooks, systemd,

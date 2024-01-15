@@ -12,3 +12,25 @@ body {
 .error-url {
   color: rgb(93, 0, 0);
 }
+
+.bio-p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.project-description {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+#api-version {
+  color: #18113d;
+}
+
+#api-version:hover {
+  font-weight: bold;
+}
+
+#api-link {
+  text-decoration: none;
+}

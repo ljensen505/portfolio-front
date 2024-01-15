@@ -12,15 +12,21 @@ const download = <FontAwesomeIcon icon={faDownload} />;
 
 function BioRow(props: BioProps) {
   const bioLines = props.bio.split("\n").map((line, index) => {
-    return <p key={index}>{line}</p>;
+    return (
+      <p className="bio-p" key={index}>
+        {line}
+      </p>
+    );
   });
 
   return (
     <Row>
-      <Col className="text-center">
-        <p className="h1">About Me</p>
+      <Col className="">
+        <p className="h1 text-end mt-4 ">About Me</p>
         {bioLines}
-        <Nav.Link href={resumeUrl}>Resume {download}</Nav.Link>
+        <Nav.Link className="text-center" target="_blank" href={resumeUrl}>
+          Resume {download}
+        </Nav.Link>
       </Col>
     </Row>
   );

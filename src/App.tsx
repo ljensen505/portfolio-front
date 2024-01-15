@@ -70,11 +70,18 @@ function App() {
             <BioRow bio={aboutData?.bio || ""} />
           </Col>
         </Row>
-        <Projects />
+        <Row>
+          <Col md={{ span: 8, offset: 2 }}>
+            <Projects />
+          </Col>
+        </Row>
       </Container>
       <footer className="text-center">
         <p>
-          API version: <code>{apiVersion?.version || ""}</code>
+          API version:{" "}
+          <a id="api-link" href={API_URL}>
+            <code id="api-version">{apiVersion?.version || ""}</code>
+          </a>
         </p>
       </footer>
     </>
