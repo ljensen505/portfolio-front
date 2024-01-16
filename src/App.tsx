@@ -8,6 +8,7 @@ import Projects from "./Projects/Projects";
 import ErrModal from "./ErrModal";
 import { ErrModalProps } from "./ErrModal";
 import { fetchFromApi, API_URL } from "./api";
+import Profile from "./Profile";
 
 interface About {
   name: string;
@@ -64,6 +65,7 @@ function App() {
         linkedin={aboutData?.linkedin || ""}
         github={aboutData?.github || ""}
       />
+      <Profile />
       <Container>
         <Row>
           <Col md={{ span: 8, offset: 2 }}>

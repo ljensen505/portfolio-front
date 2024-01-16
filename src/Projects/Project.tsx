@@ -17,7 +17,8 @@ export interface ProjectProps {
 const trash = <FontAwesomeIcon icon={faTrash} />;
 
 function ProjectCard(props: ProjectProps) {
-  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
+  const siteOwnerSub = import.meta.env.VITE_SITE_OWNER_SUB as string;
 
   const handleDelete = async () => {
     const accessToken = await getAccessTokenSilently({
@@ -69,9 +70,11 @@ function ProjectCard(props: ProjectProps) {
       </Card.Body>
       {isAuthenticated && (
         <Card.Footer>
-          <Card.Link onClick={handleDelete} className="delete-project">
-            {trash}
-          </Card.Link>
+          {user?.sub === siteOwnerSub && (
+            <Card.Link onClick={handleDelete} className="delete-project">
+              {trash}
+            </Card.Link>
+          )}
         </Card.Footer>
       )}
     </Card>
