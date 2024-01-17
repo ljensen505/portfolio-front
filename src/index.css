@@ -27,6 +27,31 @@ body {
   color: rgb(217, 20, 20);
 }
 
+.delete-project:hover {
+  font-weight: bold;
+  color: rgb(255, 0, 0);
+  cursor: pointer;
+}
+
+.edit-project {
+  color: rgb(6, 191, 52);
+}
+
+.edit-project:hover {
+  font-weight: bold;
+  color: aquamarine;
+  cursor: pointer;
+}
+
+.resume-replace {
+  color: rgb(6, 191, 52);
+}
+
+.resume-replace:hover {
+  font-weight: bold;
+  color: aquamarine;
+}
+
 #api-version {
   color: #1a009d;
 }

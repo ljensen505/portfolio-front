@@ -1,12 +1,13 @@
-export const API_URL = import.meta.env.VITE_API_URL as string;
+const API_URL_ENV = import.meta.env.VITE_API_URL as string;
+export const API_URL = API_URL_ENV.endsWith("/")
+  ? API_URL_ENV.slice(0, -1)
+  : `${API_URL_ENV}`;
 
 export async function fetchFromApi(
   endpoint: string,
   method: string = "GET",
   body?: unknown
 ) {
-  let url = "";
-  API_URL.endsWith("/") ? (url = API_URL.slice(0, -1)) : (url = API_URL);
   try {
     const options: RequestInit = {
       method,
@@ -15,7 +16,7 @@ export async function fetchFromApi(
     if (body) {
       options.body = JSON.stringify(body);
     }
-    const response = await fetch(`${url}${endpoint}`, options);
+    const response = await fetch(`${API_URL}${endpoint}`, options);
     if (!response.ok) {
       throw new Error(response.statusText);
     }

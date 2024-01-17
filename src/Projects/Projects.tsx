@@ -1,11 +1,16 @@
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import ProjectCard from "./Project";
 import { ProjectProps } from "./Project";
 import { useEffect, useState } from "react";
 import { fetchFromApi } from "../api";
+import { useAuth0 } from "@auth0/auth0-react";
+import AddProject from "./AddProject";
 
 function Projects() {
   const [projectsData, setProjectsData] = useState<ProjectProps[]>([]);
+  const { isAuthenticated, user } = useAuth0();
+  const siteOwnerSub = import.meta.env.VITE_SITE_OWNER_SUB as string;
+
   useEffect(() => {
     fetchFromApi("/projects")
       .then((data) => {
@@ -44,6 +49,7 @@ function Projects() {
       <Row>
         <Col className="text-center">
           <p className="h1 text-end mt-4">Projects</p>
+
           <p className="project-description">
             'self hosted' indicates that a given project is hosted on a
             Raspberry Pi or with Linode. These projects are served with Nginx
@@ -53,6 +59,11 @@ function Projects() {
         </Col>
       </Row>
       {projects}
+      {isAuthenticated && user?.sub === siteOwnerSub && (
+        <Container className="text-center mb-4">
+          <AddProject />
+        </Container>
+      )}
     </>
   );
 }
