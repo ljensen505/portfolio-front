@@ -10,7 +10,7 @@ interface BioProps {
   bio: string;
 }
 
-const resumeUrl = `${API_URL}static/resume.pdf`;
+const resumeUrl = `${API_URL}/static/resume.pdf`;
 const download = <FontAwesomeIcon icon={faDownload} />;
 
 const siteOwnerSub = import.meta.env.VITE_SITE_OWNER_SUB as string;
