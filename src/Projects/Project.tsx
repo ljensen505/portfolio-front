@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import Card from "react-bootstrap/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
 import { API_URL } from "../api";
 
 export interface ProjectProps {
@@ -15,6 +15,7 @@ export interface ProjectProps {
 }
 
 const trash = <FontAwesomeIcon icon={faTrash} />;
+const pen = <FontAwesomeIcon icon={faPen} />;
 
 function ProjectCard(props: ProjectProps) {
   const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
@@ -25,7 +26,7 @@ function ProjectCard(props: ProjectProps) {
       authorizationParams: { audience: "https://api.lucasjensen.me/" },
     });
 
-    fetch(`${API_URL}projects/${props.id}`, {
+    fetch(`${API_URL}/projects/${props.id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -68,13 +69,12 @@ function ProjectCard(props: ProjectProps) {
           </Card.Link>
         )}
       </Card.Body>
-      {isAuthenticated && (
-        <Card.Footer>
-          {user?.sub === siteOwnerSub && (
-            <Card.Link onClick={handleDelete} className="delete-project">
-              {trash}
-            </Card.Link>
-          )}
+      {isAuthenticated && user?.sub === siteOwnerSub && (
+        <Card.Footer className="text-end">
+          <Card.Link onClick={handleDelete} className="delete-project">
+            {trash}
+          </Card.Link>
+          <Card.Link className="edit-project">{pen}</Card.Link>
         </Card.Footer>
       )}
     </Card>

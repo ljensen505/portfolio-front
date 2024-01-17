@@ -9,6 +9,7 @@ import ErrModal from "./ErrModal";
 import { ErrModalProps } from "./ErrModal";
 import { fetchFromApi, API_URL } from "./api";
 import Profile from "./Profile";
+import Footer from "./Footer";
 
 interface About {
   name: string;
@@ -59,7 +60,7 @@ function App() {
   return (
     <>
       <Header
-        name="Lucas Jensen"
+        name={aboutData?.name || ""}
         title="Software Engineer"
         email={aboutData?.email || ""}
         linkedin={aboutData?.linkedin || ""}
@@ -78,20 +79,7 @@ function App() {
           </Col>
         </Row>
       </Container>
-      <footer className="text-center">
-        <p>
-          App vesrion:{" "}
-          <a id="app-link" href="lucasjensen.me">
-            <code id="app-version">{import.meta.env.PACKAGE_VERSION}</code>
-          </a>
-        </p>
-        <p>
-          API version:{" "}
-          <a id="api-link" href={API_URL}>
-            <code id="api-version">{apiVersion?.version || ""}</code>
-          </a>
-        </p>
-      </footer>
+      <Footer apiVersion={apiVersion?.version || ""} />
     </>
   );
 }
